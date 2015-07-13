@@ -4,36 +4,50 @@
 
 //BFS
 
+
 bool isLeaf(TreeNode *root)
 {
 	return (root->left==NULL && root->right ==NULL);
 }
-int minDepth(TreeNode* root) 
-{
-	int depth = 0;
-	queue<TreeNode*> v;
+    int minDepth(TreeNode* root) 
+    {
+        int depth = 0;
+    	if(root == NULL)
+        	return depth;
 
-	v.push_back(root);
+         if(isLeaf(root))
+         	return ++depth;
 
-	while(!v.empty())
-	{	
-		TreeNode* tmp = v.front();
-		if(isLeaf(tmp))
-			return depth+1;
+          	else
+         	{
+         	    
+         	    if(root->left != NULL && root->right == NULL)
+         	        return (minDepth(root->left)+1);
+         	    if(root->left == NULL && root->right != NULL)
+         	        return (minDepth(root->right)+1);
+         	    else
+         	        return (min(minDepth(root->left),minDepth(root->right))+1);
+         	}
+    }
+    // int minDepth(TreeNode* root) 
+    // {
 
-		else{
-			if(tmp->left !=NULL) v.push_back(tmp->left);
-			if(tmp->right != NULL) v.push_back(tmp->right);
+	// queue<TreeNode*> v;
+	// v.push(root);
 
-			depth++;
-			v.pop_front();
-		}
-	}
+	// while(!v.empty())
+	// {	
+	// 	TreeNode* tmp = v.front();
+	// 	if(isLeaf(tmp))
+	// 		return depth+1;
 
+	// 	else{
+	// 		if(tmp->left !=NULL) v.push(tmp->left);
+	// 		if(tmp->right != NULL) v.push(tmp->right);
 
-}
-
-
-// WA: [1,2,3,4,5];
-//Expected: 2 ?? 
-// How come 
+	// 		depth++;
+	// 		v.pop();
+	// 	}
+	// }
+	
+   
