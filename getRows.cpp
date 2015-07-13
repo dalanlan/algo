@@ -31,10 +31,45 @@ vector<int> getRow(int rowIndex)
 
 }   
 
-vector<int> getRow(int rowIndex)
+vector<int> getRow(int rowIndex) 
 {
-	
+
+  //  vector<int> v1={};
+    if(rowIndex<0)
+    	return vector<int>();
+		//return v1;
+	vector<int> v(1,1);
+	vector<int> vNext={};
+	while(rowIndex != 0)
+	{
+		vNext={};
+		for(int i=0;i<v.size()-1;i++)
+			vNext.push_back(v[i]+v[i+1]);
+		vNext.push_back(1);
+		vNext.insert(vNext.begin(),1);
+		v = vNext;
+		rowIndex--;
+
+	}
+	return v;
+}   // User less space then above;
+
+//Here is an easy way
+vector<int> getRow(int rowIndex) {
+    vector<int> ans;
+    int pre, tmp;
+    for (int i = 0;i <= rowIndex;++i) {
+        pre = 0;
+        for (int j = 0;j < i;++j) {
+            tmp = ans[j];
+            ans[j] += pre;
+            pre = tmp;
+        }
+        ans.push_back(1);
+    }
+    return ans;
 }
+
 
 int main()
 {
