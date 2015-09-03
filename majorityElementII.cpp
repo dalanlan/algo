@@ -1,8 +1,3 @@
-#include <iostream>
-#include <vector>
-using namespace std;
-
-
 vector<int> majorityElement(vector<int>& nums) {
     vector<int> res;
     if(nums.size()==0)
@@ -47,15 +42,8 @@ vector<int> majorityElement(vector<int>& nums) {
         for(int i=0;i<nums.size();i++)
             if(nums[i] == can2)
                 count2++;
-        if(count2 > nums.size()/3)
+        if(count2 > nums.size()/3 && can1 !=can2)
             res.push_back(can2);
     
     return res;
-    }
-
-    int main()
-    {   
-        std::vector<int> v(3,0);
-        cout<<majorityElement(v) <<endl;
-        return 0;
     }
