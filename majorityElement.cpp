@@ -25,59 +25,7 @@ int majorityElement(std::vector<int> &nums)
 	}
 	return can;
 }
-int majorityElements( vector<int>  &nums)
-{
-	int n = nums.size();
-	if(n<= 2)
-		return nums[0];
-	
-	//int count[n];
-	//memset(count,0,sizeof(int)*n);
 
-	int can1 = nums[0];
-	int count1 = 1;
-	
-	int i=1;
-	while(nums[i]==nums[0])
-	{
-		count1++;
-		i++;
-	}
-	if(i==n)
-		return can1;
-	int can2 = nums[i];
-	int count2 =1 ;
-	
-	for(int j = i+1;j<n;j++)
-	{
-		if(nums[j] == can1)
-			count1++;
-		if(nums[j] == can2)
-			count2++;
-		else
-		{
-			count1--;
-			count2--;
-		}
-		if(count1 < 0)
-		{
-			can1 = nums[j];
-			count1 = 1;
-		}	
-		if(count2<0)
-		{
-			can2 = nums[j];
-			count2= 1;
-		}
-		
-	}
-	cout<<can1<<':'<<count1<<','<<can2<<':'<<count2<<endl;
-	if(count1> count2)
-		return can1;
-	else
-		return can2;
-
-}// It's right,  but may cost too much stack.? I dont know.
 
 int main()
 {
