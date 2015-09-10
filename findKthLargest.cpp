@@ -1,5 +1,5 @@
 // Solution 1 : Quicksort
-//
+
 void quicksort(vector<int> &nums, int left, int right)
 {
     if(nums.size()>1)
@@ -22,7 +22,6 @@ void quicksort(vector<int> &nums, int left, int right)
         }
         
     }
-    //cout<<i<<" "<<j<<" "<<left<<" "<<right <<endl;
     
     if(left<j)
         quicksort(nums,left,j);
@@ -35,3 +34,5 @@ int findKthLargest(vector<int>& nums, int k) {
     quicksort(nums,0,nums.size()-1);
     return nums[nums.size()-k];
 }
+
+//Solution 2 
