@@ -37,14 +37,9 @@ int firstBadVersion(int n)
 	{
 		int pivot = left + ((right - left)>>1); 
 		if(isBadVersion(pivot)) 
-		{
 			right = pivot; 
-		}
 		else
-		{
 			left = pivot; 
-		}
-
 	}
 	if(isBadVersion(left))
 		return left;
