@@ -74,3 +74,35 @@ int top(){
 bool empty(){
     return q1.empty();
 }
+
+//Solution 3
+queue<int> q;
+
+void push(int x){
+    q.push(x);
+}
+void pop(){
+    for(int i = 0; i<q.size()-1;i++)
+    {
+        int top = q.front();
+        q.pop();
+        q.push(top);
+    }
+    q.pop();
+}
+int top(){
+    int top;
+    for(int i=0;i<q.size()-1;i++)
+    {
+        top = q.front();
+        q.pop();
+        q.push(top);
+    }
+    top = q.front();
+    q.pop();
+    q.push(top);
+    return top;
+}
+bool empty(){
+    return q.empty();
+}
