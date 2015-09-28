@@ -1,3 +1,8 @@
+/*
+http://stackoverflow.com/questions/688276/implement-stack-using-two-queues
+*/
+
+//Solution 1: Version A
 queue<int> in;
 queue<int> out;
 // Push element x onto stack.
@@ -41,4 +46,31 @@ int top() {
 // Return whether the stack is empty.
 bool empty() {
     return in.empty();
+}
+
+//Solution 2: Version B
+queue<int> q1;
+queue<int> q2;
+
+void push(int x){
+    q2.push(x);
+    while(!q1.empty())
+    {
+        int top = q1.front();
+        q1.pop();
+        q2.push(top);
+    }
+    queue<int> tmp = q1;
+    q1 = q2;
+    q2 = tmp;
+}
+
+void pop(){
+    q1.pop();
+}
+int top(){
+    return q1.front();
+}
+bool empty(){
+    return q1.empty();
 }
