@@ -24,3 +24,27 @@ void nextPermutation(vector<int>& nums) {
 
 	return;
 }
+
+//Solution 3: just like Solution 2
+void nextPermutation(vector<int>& nums) {
+	int j=nums.size()-2,k=nums.size()-1;
+
+	for(;j>=0;j--) {
+		if(nums[j] < nums[j+1])
+			break;
+	}
+
+	if(j == -1)
+	{
+		reverse(nums.begin(),nums.end());
+		return;
+	}
+
+	for(;k >= j;k--) {
+		if(nums[k] > nums[j])
+			break;
+	}
+	swap(nums[j],nums[k]);
+	reverse(nums.begin()+j+1,nums.end());
+	return;
+}
