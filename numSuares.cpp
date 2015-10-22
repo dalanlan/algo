@@ -4,7 +4,7 @@
 // Solution 1: theory of numbers
 int numSquares(int n) {
 	
-	if(n % 4 == 0)
+	while(n % 4 == 0)
 		n /= 4;
 	if(n % 8 == 7)
 		return 4;
@@ -16,6 +16,16 @@ int numSquares(int n) {
 	return 3;
 }
 
+// Solution 2: dynamic programming
 int numSquares(int n) {
-	//??
+	
+	vector<int> dp(n+1,INT_MAX);
+	dp[0] = 0;
+
+	for(int i=0;i<n;i++){
+		for(int j=1;i+j*j<=n;j++) {
+			dp[i+j*j] = min(dp[i+j*j], dp[i]+1);
+		}
+	}
+	return dp.back();
 }
