@@ -1,3 +1,4 @@
+// Combination Sum
 void sum(vector<int>& candidates, int target, int index, vector<vector<int>>& res, vector<int>& path) {
     for(int j = index; j < candidates.size(); j++) {
         if(candidates[j] > target)
@@ -6,7 +7,7 @@ void sum(vector<int>& candidates, int target, int index, vector<vector<int>>& re
             path.push_back(candidates[j]);
             res.push_back(path);
             path.pop_back();
-            
+            return;
         }
         else {
             path.push_back(candidates[j]);
