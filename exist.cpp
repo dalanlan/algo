@@ -10,8 +10,8 @@
 			return true;
 		}
 		else {
-			if(bfs(board, visit, row+1, col, word, index+1) || bfs(board, visit, row, col+1 , word, index+1) ||
-			bfs(board, visit, row-1, col, word, index+1)||bfs(board, visit, row, col-1, word, index+1)) {
+			if(dfs(board, visit, row+1, col, word, index+1) || dfs(board, visit, row, col+1 , word, index+1) ||
+			dfs(board, visit, row-1, col, word, index+1)||dfs(board, visit, row, col-1, word, index+1)) {
 				return true;
 			}
 
