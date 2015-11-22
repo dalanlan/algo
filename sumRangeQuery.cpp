@@ -33,8 +33,9 @@
     }
 
 
-// Still TLE solution
-
+// AC 
+// https://leetcode.com/discuss/70520/java-organized-segment-tree-solution-which-easy-understand
+// struct treeNode
 struct treeNode {
     int start;
     int end;
@@ -73,10 +74,10 @@ void updateUtil(treeNode* root, int i, int val) {
     }
 
     int mid = root->start + (root->end - root->start)/2;
-    if(i < mid) {
+    if(i <= mid) {
         updateUtil(root->left, i, val);
     }
-    if(i > mid) {
+    else {
         updateUtil(root->right, i, val);
     }
     root->val = root->left->val + root->right->val;
@@ -88,7 +89,7 @@ void update(int i, int val) {
 }
 
 int sumRangeUtil(treeNode* root, int i, int j) {
-    if(root->start == root->end) {
+    if(root->start == i && root->end == j) {
         return root->val;
     }
     int mid = root->start + (root->end - root->start)/2;
@@ -104,4 +105,20 @@ int sumRangeUtil(treeNode* root, int i, int j) {
 }
 int sumRange(int i, int j){
     return sumRangeUtil(root, i, j);    
+}
+
+// AC 2???
+// Segment tree: http://www.geeksforgeeks.org/segment-tree-set-1-sum-of-given-range/
+// Using array to store node sum
+// It can wait
+
+int sum[];
+NumArray(vector<int>& nums) {
+}
+
+void update(int i, int val) {
+
+}
+int sumRange(int i, int j) {
+
 }
