@@ -62,3 +62,25 @@ void connect(TreeLinkNode* root) {
 		}
 	}
 }
+// smart bfs 
+void connect(TreeLinkNode* root) {
+	TreeLinkNode* dummy = new TreeLinkNode(0);
+	TreeLinkNode* pre = dummy;
+
+	while(root != NULL) {
+		if(root->left) {
+			pre->next = root->left;
+			pre = pre->next;
+		}
+		if(root->right) {
+			pre->next = root->right;
+			pre = pre->next;
+		}
+		root = root->next;
+		if(root == NULL) {
+			pre = dummy;
+			root = pre->next;
+			dummy->next = NULL;
+		}
+	}
+}

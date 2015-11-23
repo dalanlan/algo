@@ -34,4 +34,29 @@ void connect(TreeLinkNode* root) {
 	}
 }
 
-// Let me try stupid BFS 
+// Let me try BFS / level order traversal
+// Ref
+// https://leetcode.com/discuss/67291/java-solution-with-constant-space
+// https://leetcode.com/discuss/65526/ac-python-o-1-space-solution-12-lines-and-easy-to-understand
+
+  void connect(TreeLinkNode* root) {
+	TreeLinkNode* dummy = new TreeLinkNode(0);
+	TreeLinkNode* pre = dummy;
+    
+	while(root != NULL){
+		if(root->left != NULL) {
+			pre->next = root->left;
+			pre = pre->next;
+		}
+		if(root->right != NULL) {
+			pre->next = root->right;
+			pre = pre->next;
+		}
+		root = root->next;
+		if(root == NULL) {
+			pre = dummy;
+			root = dummy->next;
+			dummy->next = NULL;
+		}
+	}
+}
