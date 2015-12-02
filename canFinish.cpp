@@ -15,8 +15,8 @@ bool canFinish(int numCourses, vector<pair<int, int> >& prerequisites) {
 	
 
 	for(int i = 0; i < prerequisites.size(); i++) {
-		//for each element [a,b], we have myMap[b] = a, ...
-		myMap[prerequisites[i].second].insert(prerequisites[i].first);
+		//for each element [a,b], we have myMap[a] = b, ...
+		myMap[prerequisites[i].first].insert(prerequisites[i].second);
 
 	}
 	
@@ -30,12 +30,18 @@ bool canFinish(int numCourses, vector<pair<int, int> >& prerequisites) {
 	while(!Q.empty()) {
 		int head = Q.front();
 		Q.pop();
-		for(int i=0; i<myMap.size(); i++) {
-			myMap[i].erase(head);
+		// for(int i=0; i<myMap.size(); i++) {
+		// 	myMap[i].erase(head);
+		// }
+		for(auto it = myMap.begin(); it != myMap.end(); it++) {
+			*it.erase(head);
 		}
 
 		for(int i=0; i<numCourses;i++) {
 			if(myMap.find(i) == myMap.end()) {
+				Q.push(i);
+			}
+			else if(myMap[i].size() == 0) {
 				Q.push(i);
 			}
 		}
