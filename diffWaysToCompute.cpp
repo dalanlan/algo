@@ -2,6 +2,7 @@
 
 // solution 1: dp
 // compile error
+
 vector<vector<vector<int> > > res;
 vector<int> nums; 
 vector<char> ops;
@@ -114,7 +115,7 @@ vector<int> diffWaysToCompute(string input, unordered_map<string, vector<int>>& 
 	if(res.size() == 0) {
 		res.push_back(stoi(input));
 	}
-	//cache.insert(input, res);
+	//cache.insert(make_pair(input, res));
 	cache[input] = res;
 	return res;
 }
