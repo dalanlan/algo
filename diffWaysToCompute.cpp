@@ -1,7 +1,7 @@
 // Different ways to add parenthese
 
 // solution 1: dp
-// compile error
+// AC
 
 vector<vector<vector<int> > > res;
 vector<int> nums; 
@@ -18,7 +18,7 @@ vector<int> diffWaysToCompute(string input) {
 		return nums;
 	}
 
-	len = nums.length();
+	len = nums.size();
 	res = vector<vector<vector<int> > >(len, vector<vector<int> >());
 	for(int i = 0; i < len; i++) {
 		res[i] = vector<vector<int>>(len, vector<int>());
@@ -30,13 +30,13 @@ vector<int> diffWaysToCompute(string input) {
 }
 
 void calc() {
-	for(int dist = 0; dist < len; i++) {
+	for(int dist = 0; dist < len; dist++) {
 		for(int i = 0; i < len - dist; i++) {
 			if(dist == 0) {
 				res[i][i+dist].push_back(nums[i]);
 			}
 			else {
-				for(int j = 0; j < dist; j++){
+				for(int j = 0; j < dist; j++) {
 					for(auto l: res[i][i+j]) {
 						for(auto r:res[i+j+1][i+dist]) {
 							if (ops[i+j] == '-') {
@@ -45,7 +45,7 @@ void calc() {
 							else if(ops[i+j] == '+') {
 								res[i][i+dist].push_back(l+r);
 							}
-							else if(ops[i+j] == '*'{
+							else if(ops[i+j] == '*') {
 								res[i][i+dist].push_back(l*r);	
 							}
 						}

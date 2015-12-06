@@ -9,20 +9,37 @@ level order traversal of its nodes' values.
 vector<vector<int>> levelOrderBottom(TreeNode* root) {
 	vector<vector<int>> res;
 
-	levelOrderBottom(root, res);
+	if(root == NULL) {
+		return res;
+	}
 
+	queue<TreeNode*> Q;
+	Q.push(root);
+
+	TreeNode* t;
+	vector<int> path;
+	int sz;
+
+	while(!Q.empty()) {
+		path.clear();
+		sz = Q.size();
+		for(int i=0; i<sz; i++) {
+			t = Q.front();
+			Q.pop();
+			path.push_back(t->val);
+			if(t->left != NULL) {
+				Q.push(t->left);
+			}
+			if(t->right != NULL) {
+				Q.push(t->right);
+			}
+		}
+		res.push_back(path);
+	}
+
+	for(int i=0;i<res.size()/2;i++) {
+		swap(res[i], res[res.size()-i-1]);
+	}
 	return res;
 }
 
-void levelOrderBottom(TreeNode* root, vector<vector<int>>& res) {
-	if(root->left != NULL && root->right != NULL) {
-		res.push_back(vector<TreeNode*>(root->left, root->right));
-	}
-	else if(root->left != NULL) {
-		res.push_back(vector<TreeNode*>(root->left));
-	} else if(root->right != NULL) {
-		res.push_back(vector<TreeNode*>(root->right));
-	}
-	res.push_back(vector<TreeNode*>(root));
-
-}
