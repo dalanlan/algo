@@ -96,7 +96,7 @@ void Graph::topologicalSort() {
 		}
 	}
 	while(!Stack.empty()) {
-		cout<< Stack.top()<<" ";
+		cout<< Stack.()<<" ";
 		Stack.pop();
 	}
 }
