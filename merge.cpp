@@ -24,7 +24,7 @@ void merge(vector<int>& nums1, int m, vector<int>& nums2,int n)
 		pos--;
 	}
 
-	iwhile(pos2 >=0)
+	while(pos2 >=0)
 	{	
 		nums1[pos] = nums2[pos2];
 		pos2--;

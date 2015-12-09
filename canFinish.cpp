@@ -9,50 +9,47 @@
 using namespace std;
 
 
-bool canFinish(int numCourses, vector<pair<int, int> >& prerequisites) {
-	
-	unordered_map<int, unordered_set<int> > myMap;
-	
-
-	for(int i = 0; i < prerequisites.size(); i++) {
-		//for each element [a,b], we have myMap[a] = b, ...
-		myMap[prerequisites[i].first].insert(prerequisites[i].second);
-
-	}
-	
-	queue<int> Q;
-
+// TLE
+class Solution { 
+public: 
+bool canFinish(int numCourses, vector<pair<int, int> >& prerequisites) 
+{
+	unordered_map<int, unordered_set<int> > myMap; 
+	for(int i = 0; i < prerequisites.size(); i++) { //for each element [a,b], we have myMap[a] = b, ... 
+		if(myMap[prerequisites[i].first].find(prerequisites[i].second) == myMap[prerequisites[i].first].end()) { 
+				myMap[prerequisites[i].first].insert(prerequisites[i].second); 
+		} 
+	} 
+	queue<int> Q; 
 	for(int i=0; i<numCourses; i++) {
-		if(myMap.find(i) == myMap.end()) {
-			Q.push(i);
-		}
-	}
-	while(!Q.empty()) {
-		int head = Q.front();
-		Q.pop();
-
-		for(auto& it: myMap) {
-			it.second.erase(head);
-			if(it.second.size() == 0) {
-				Q.push(it.first);
-			}
-		}
-
-		// for(int i=0; i<numCourses;i++) {
-		// 	if(myMap.find(i) == myMap.end()) {
-		// 		Q.push(i);
-		// 	}
-		// }
-	}
-	
-	if(myMap.empty()) {
-		return true;
-	}
-	else {
-		return false;
-	}
-
-}
+		if(myMap.find(i) == myMap.end()) { 
+			Q.push(i); 
+		} 
+	} 
+	while(!Q.empty()) { 
+		int head = Q.front(); 
+		Q.pop(); 
+		unordered_map<int, unordered_set<int>> originalMap = myMap; 
+		for(auto& it: originalMap) { 
+			if(it.second.find(head) != it.second.end()) { 
+				it.second.erase(head);	
+			} 
+			if(it.second.size() == 0) { 
+				Q.push(it.first); 
+				myMap.erase(it.first); 
+			} 
+		} 
+		for (auto& it : myMap) 
+			it.second = originalMap[it.first]; 
+	} 
+	if(myMap.empty()) { 
+		return true; 
+	} 
+	else { 
+		return false; 
+	} 
+} 
+};
 
 int main() {
 	vector<pair<int, int> > prerequisites;
