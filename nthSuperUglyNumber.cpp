@@ -7,6 +7,16 @@ prime factors are in the given prime list `primes`
 of size k.
 */
 
+// Sol 0: Rewrite Sol 1
+
+struct group {
+	int val;
+	int factor;
+	int index;
+	group(int v, int f, int i):val(v), factor(f), index(i) {}
+};
+
+
 
 // Sol 1: priority_queue
 private:
