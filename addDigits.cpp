@@ -27,3 +27,11 @@ int addDigits(int num) {
 int addDigits(int num){
     return 1+(num-1)%9;
 }
+
+//solution3: 
+int addDigits(int num) {
+    if(num % 9 == 0 && num != 0) {
+        return 9;
+    }
+    else return (num%9);
+}
