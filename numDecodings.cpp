@@ -19,9 +19,9 @@ int numDecodings(string s) {
 	}
 
 	//res[n] responsonds to s with n length, so we should return res[n]
-	//int *res = new int[len+1];
-	vector<int> res(len+1);
-	res[0] =1; //why???
+	int *res = new int[len+1];
+	//vector<int> res(len+1);
+	res[0] =1; 
 
 	if(s[0] == '0') {
 		res[1] = 0;
@@ -31,7 +31,7 @@ int numDecodings(string s) {
 	}
 
 	for(int i=2; i<= len; i++) {
-		if(s[i-1] = '0') { // the last char of string s, or the current char 
+		if(s[i-1] == '0') { // the last char of string s, or the current char 
 			res[i] = 0;
 		}
 		else {
