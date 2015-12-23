@@ -17,6 +17,7 @@ we get the following sequence(ie, for n=3):
 Given n and k, return the kth permutation sequence.
 */
 
+// Memory Limit Exceeded
  void permute(string& init, vector<string>& resVect, int index, int k) {
 	if(index == init.length()-1) {
 		resVect.push_back(init);
