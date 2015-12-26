@@ -41,3 +41,38 @@ string getPermutation(int n,int k) {
 	sort(resVect.begin(), resVect.end());
 	return resVect[k-1];
 }
+
+// AC 
+// in a math way
+string getPermutation(int n,int k) {
+	string perm;
+
+	// 1,2, ..., n
+	vector<int> nums;
+	for(int i=1; i<=n; i++) {
+		nums.push_back(i); 
+	}
+
+	//0! ~ (n-1)!
+	vector<int> factorial; 
+	int multi = 1;
+	factorial.push_back(1); // 0!=1;
+	for(int i=1; i<n; i++) { // 1!~(n-1)!	
+		multi *= i;
+		factorial.push_back(multi); 
+	}
+
+	k--; 
+	int index;
+
+	for(int i=1; i <= n; i++) {
+		index = k/factorial[n-i];
+		perm += nums[index]+'0';
+		nums.erase(nums.begin() + index);
+		k -= index*factorial[n-i];
+	}
+
+	return perm;
+
+
+}
