@@ -1,5 +1,5 @@
 // 257. Binary Tree Paths
-
+// 480. LintCode
 /* 
 Given a binary tree, return all root-to-leaf paths.
 */

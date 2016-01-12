@@ -1,39 +1,40 @@
 //Happy Number
 
+// LintCode 488 
+
 #include <iostream>
 #include <unordered_set>
 using namespace std;
 
-int countDigitSquareSum(int n)
-{
-	int sum = 0;
-	while(n)
-	{
-		int a = n%10;
-		sum += a*a;
-		n /=10;
-	}
-	return sum;
-
-}
-bool isHappy(int n)
-{
-	unordered_set<int> mp;
-	int res = n;
-	while(x > 1)
-	{
-		x = countDigitSquareSum(res);
-		if(x == 1)
-			return true;
-		else
-			if(mp.find(x) != mp.end())
-				return false;
-			else
-				mp.insert(res);
-	}
-	return true;
-
-}
+int countDigSquareSum(int n) {
+        int sum = 0;
+        while(n != 0) {
+            int a = n%10;
+            sum += a*a;
+            n /= 10;
+        }
+        return sum;
+    }
+    bool isHappy(int n) {
+        unordered_set<int> cache;
+        
+        while(n > 1) {
+            n = countDigSquareSum(n);
+            if(n == 1) {
+                return true;
+            }
+            else {
+                if(cache.find(n) == cache.end()) {
+                    cache.insert(n);
+                }
+                else {
+                    return false;
+                }
+            }
+    
+        }
+        return true;
+    }
 
 int main()
 {
