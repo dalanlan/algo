@@ -3,7 +3,7 @@
 LintCode 85: insert a node into a binary search tree
 */
 
-solution 1: recursive
+// solution 1: recursive
 
 /**
  * Definition of TreeNode:
@@ -51,3 +51,34 @@ public:
 };
 
 // solution 2: iterative 
+
+TreeNode* insertNode(TreeNode* root, TreeNode* node) {
+	if(root == NULL) {
+		return node;
+	}
+	queue<TreeNode*> q;
+	q.push(root);
+	while(!q.empty()) {
+		TreeNode* tmp = q.front();
+		q.pop();
+		if(tmp->val < node->val) {
+			if(tmp->right == NULL) {
+				tmp->right = node;
+				break;
+			}
+			else {
+				q.push(tmp->right);
+			}
+		}
+		else {
+			if(tmp->left == NULL) {
+				tmp->left = node;
+				break;
+			}
+			else {
+				q.push(tmp->left);
+			}
+		}
+	}
+	return root;
+}
