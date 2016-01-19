@@ -76,3 +76,26 @@ ListNode *partition(ListNode *head, int x) {
     }
 
 
+// solution 2: rewrite 
+// use a dummy pointer
+
+ListNode *partition(ListNode *head, int x) {
+	ListNode *dummyLeft = new ListNode(0);
+	ListNode *dummyRight = new ListNode(0);
+
+	ListNode *left=dummyLeft, *right=dummyRight;
+	while(head) {
+		if(head->val < x) {
+			left->next = head;
+			left = left->next;
+		}
+		else {
+			right->next = head;
+			right = right->next;
+		}
+		head = head->next;
+	}
+	left->next=dummyRight->next;
+	right->next=NULL;
+	return dummyLeft->next;
+}
