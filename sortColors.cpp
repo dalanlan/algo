@@ -48,3 +48,21 @@ void sortColors(vector<int>& nums) {
 	}
 	return;
 }
+
+// nth_element
+// negative, zero, positive 
+void sortColors(vector<int>& nums) {
+	int neg=0, l=0, r=nums.size()-1;;
+	while(l <= r) {
+		if(nums[l] < 0) {
+			swap(nums[l++], nums[neg++]);
+		}
+		else if(nums[l] == 0) {
+			l++;
+		}
+		else {
+			swap(nums[l], nums[r--]);
+		}
+	}
+	return;
+}
