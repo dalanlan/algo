@@ -28,16 +28,21 @@ public:
         if(s == NULL || t==NULL) {
             return false;
         }
-        
+        unordered_set<DirectedGraphNode*> visited;
         queue<DirectedGraphNode*> q;
         q.push(s);
         
         while(!q.empty()) {
             DirectedGraphNode* tmp = q.front();
+            q.pop();
             if(tmp == t) {
                 return true;
             }
-            q.pop();
+            if(visited.find(tmp) != visited.end()) {
+            	continue;
+            }
+            visited.insert(tmp);
+            
             for(int i=0; i<tmp->neighbors.size(); i++) {
                 if(tmp->neighbors[i] == t) {
                     return true;
@@ -51,5 +56,28 @@ public:
 
 // solution 2: DFS
 
+bool dfs(unordered_set<DirectedGraphNode*> &visited, DirectedGraphNode* s, DirectedGraphNode* t) {
+	visited.insert(s);
+
+	if(s == t) {
+		return true;
+	}
+	for(int i=0; i<s->neighbors.size(); i++) {
+		if(visited.find(s->neighbors[i]) == visited.end()) {
+			if(dfs(visited, s->neighbors[i], t)) {
+				return true;
+			}
+		}
+	}
+	return false;
+}
 bool hasRoute(vector<DirectedGraphNode*> graph,
                   DirectedGraphNode* s, DirectedGraphNode* t) {
+
+	if(s==NULL || t==NULL || graph.size() == 0) {
+		return false;
+	}
+
+	unordered_set<DirectedGraphNode*> visited;
+	return dfs(visited, s, t);
+}
