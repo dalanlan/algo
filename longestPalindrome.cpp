@@ -167,3 +167,6 @@ string longestPalindrome(string& s) {
 }
 
 // solution 5: 
+
+// How to find out the longest common substring 
+// KMP match

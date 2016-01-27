@@ -21,16 +21,16 @@ public:
     int findFirstBadVersion(int n) {
         int lo=1, hi = n;
         while(lo < hi-1) {
-        	int mid = lo + ((hi-lo)>>1);
+            int mid = lo + ((hi-lo)>>1);
 
-        	if(isBadVersion(mid)) {
-        		hi = mid;
-        	}
-        	else {
-        		lo = mid+1;
-        	}
+            if(SVNRepo::isBadVersion(mid)) {
+                hi = mid;
+            }
+            else {
+                lo = mid+1;
+            }
         }
-        if(isBadVersion(lo)) {
+        if(SVNRepo::isBadVersion(lo)) {
         
             return lo;
         }

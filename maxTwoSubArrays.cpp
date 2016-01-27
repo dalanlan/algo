@@ -2,6 +2,11 @@
 /*
 LintCode : Max two subarrays
 http://www.lintcode.com/zh-cn/problem/maximum-subarray-ii/
+
+
+Given an array of integers, find two non-overlapping subarrays which have the largest sum.
+The number in each subarray should be contiguous.
+Return the largest sum.
 */
 
 class Solution {
