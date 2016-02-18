@@ -66,3 +66,29 @@ void sortColors(vector<int>& nums) {
 	}
 	return;
 }
+
+
+// solution: see you again
+class Solution{
+public:
+    /**
+     * @param nums: A list of integer which is 0, 1 or 2 
+     * @return: nothing
+     */    
+    void sortColors(vector<int> &nums) {
+        // write your code her
+        
+        int lo=0, l=0, r=nums.size()-1;
+        while(l <= r) {
+            if(nums[l] == 0) {
+                swap(nums[lo++], nums[l++]);
+            }
+            else if(nums[l] == 1) {
+                l++;
+            }
+            else {
+                swap(nums[l], nums[r--]);
+            }
+        }
+    }
+};

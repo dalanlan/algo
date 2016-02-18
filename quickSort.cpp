@@ -14,10 +14,10 @@ void quickSort(int lo, int hi, int arr[]) {
 	int l=lo, r=hi;
 
 	while(l<=r) {
-		while(arr[l] < pivot) {
+		while(arr[l] < pivot && l<r) {
 			l++;
 		}
-		while(arr[r] > pivot) {
+		while(arr[r] > pivot && r > l) {
 			r--;
 		}
 		if(l < r) {
