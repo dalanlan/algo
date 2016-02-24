@@ -8,6 +8,10 @@
 
  C(n) = C(0)*C(n-1) + C(1)*C(n-2) + ... + C(n-1)*C(0)
  hence C(n)=Sum(C(i-1)*(n-i)), i=0,...,n-1
+
+ This is like, a recursive way to find out the answer.
+ root * left tree * right tree
+
  */
  
 
