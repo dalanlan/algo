@@ -53,3 +53,35 @@ public:
     }
 };
 
+
+// solution 2: map + one-pass
+
+RandomListNode *copyRandomList(RandomListNode *head) {
+        // map + one-pass
+        
+        RandomListNode *dummy = new RandomListNode(0);
+        RandomListNode *cur = dummy;
+        unordered_map<RandomListNode*, RandomListNode*> myMap;
+        
+        while(head) {
+            if(myMap.find(head) != myMap.end()) {
+                cur->next = myMap[head];
+            }
+            else {
+                cur->next = new RandomListNode(head->label);
+                myMap[head] = cur->next;
+            }
+            if(head->random) {
+                if(myMap.find(head->random) != myMap.end()) {
+                    cur->next->random = myMap[head->random];
+                }
+                else {
+                    cur->next->random = new RandomListNode(head->random->label);
+                    myMap[head->random] = cur->next->random;
+                }
+            }
+            cur = cur->next;
+            head = head->next;
+        }
+        return dummy->next;
+    }
