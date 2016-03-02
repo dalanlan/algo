@@ -25,7 +25,8 @@ public:
     	
     	vector<vector<int>> res;
     	if(nums.size() == 0) {
-    	    return res;
+    	    res.push_back(vector<int> {});
+            return res;
     	}
     	sort(nums.begin(), nums.end());
     	vector<int> path;
