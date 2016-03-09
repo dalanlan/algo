@@ -75,3 +75,41 @@ public:
         return res;
     }
 };
+
+
+// challeges: http://blog.csdn.net/hackbuteer1/article/details/6657109
+
+// solution 2: iterative
+
+bool isClear(vector<int> &index, int col) {
+	for(int i=0; i<col; i++) {
+		if(index[i] == index[col] || i+index[i] == col + index[col] || i-col == index[i]-index[col]) {
+			return false;
+		}
+	}
+	return true;
+}
+vector<vector<string> > solveNQueens(int n) {
+
+	vector<vector<string> > res;
+    if(n==2 || n == 3 || n <= 0) {
+        return res;
+    }
+	// use 1d vector to store the 
+	// index of queens on the row
+    vector<int> index(n, -1);
+    //initialization
+    int k=0;
+    index[0] = 0;
+    // consider kth row
+    while(k >= 0) {
+
+    	if(k < n && index[k] < n) {
+    		while(!isClear(index, k)) {
+    			index[k]
+    		}
+    	}
+    }
+
+
+}

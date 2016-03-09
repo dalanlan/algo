@@ -110,7 +110,7 @@ int MinAdjustmentCost(vector<int> A, int target) {
 				dp[i][j] = abs(j-A[i]);
 			}
 			else {
-				
+				// inner loop
 				for(int k=1; k<=100; k++) {
 					if(abs(j-k) > target) {
 						continue;

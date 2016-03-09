@@ -4,6 +4,8 @@ LintCode: N queens ii
 http://www.lintcode.com/zh-cn/problem/n-queens-ii/
 */
 
+
+// solution 1: use the same solution of N-queens
 class Solution {
 public:
     /**
