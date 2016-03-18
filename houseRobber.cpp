@@ -39,7 +39,7 @@ http://www.lintcode.com/zh-cn/problem/house-robber/
 
     	long long prev = A[0];
     	long long cur = max(A[0], A[1]);
-    	long long res = max(prev, cur);
+    	long long res = cur;
     	for(int i=2; i<sz; i++) {
     		res = max(cur, prev+A[i]);
     		prev = cur;

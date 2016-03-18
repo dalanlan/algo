@@ -48,3 +48,30 @@ public:
         
     }
 };
+
+
+// solution 2: a shorted version 
+    long long permutationIndexII(vector<int>& A) {
+        
+        long long fact = 1;
+        int multi = 1;
+        
+        long long res = 0;
+        
+        unordered_map<int, int> map;
+        
+        for(int i=A.size()-1; i>=0; i--) {
+            map[A[i]]++;
+            multi*=map[A[i]];
+            int count = 0;
+            for(int j=i+1; j<A.size(); j++) {
+                if(A[i] > A[j]) {
+                    count++;
+                }
+            }
+            res += fact*count/multi;
+                fact *= A.size()-i;
+        }
+            return ++res;
+
+    }

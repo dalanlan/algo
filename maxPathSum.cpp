@@ -55,3 +55,32 @@ public:
         return res->maxPath;
     }
 };
+
+
+// solution 2: https://leetcode.com/discuss/14190/accepted-short-solution-in-java
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    int maxPathSum(TreeNode* root) {
+        int maxPath = INT_MIN;
+        maxPathSum(root, maxPath);
+        return maxPath;
+    }
+    int maxPathSum(TreeNode* root, int & maxPath) {
+        if(root == NULL) {
+            return 0;
+        }
+        int left = max(0, maxPathSum(root->left, maxPath));
+        int right = max(0, maxPathSum(root->right, maxPath));
+        maxPath = max(maxPath, left + right + root->val);
+        return max(left, right)+root->val;
+    }
+};
