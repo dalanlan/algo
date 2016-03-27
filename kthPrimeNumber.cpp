@@ -48,3 +48,8 @@ public:
         
     }
 };
+
+
+// solution 2: use a vector to keep record
+
+long long 

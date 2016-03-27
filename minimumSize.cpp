@@ -65,3 +65,25 @@ public:
  	}
  	return count==INT_MAX?-1:count;
  }
+
+int minimumSize(vector<int> &nums, int s) {
+        int count=INT_MAX;
+        int end=0;
+        
+        int sz = nums.size();
+        if(sz == 0) {
+            return -1;
+        }
+        int sum = 0;
+        for(int start=0; start<sz; start++) {
+            while(sum < s && end < sz) {
+                sum += nums[end++];
+            }
+            if(sum >= s) {
+                count = min(count, end-start);
+                sum -= nums[start];
+            }
+        }
+        return count==INT_MAX?-1:count;
+        
+    }

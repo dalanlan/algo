@@ -88,7 +88,6 @@ public:
         vector<string> res = split(data.substr(1, data.length()-2), ',');
         TreeNode *root=new TreeNode(stoi(res[0]));
         
-        // bool isLeft = true;
         queue<TreeNode*> q;
         q.push(root);
     

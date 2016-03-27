@@ -39,3 +39,45 @@ vector<string> anagrams(vector<string> &strs) {
 	return res;
 }
 };
+
+
+// solution 2: use a hash function to deal with the key 
+// of the hash map
+
+int getHash(vector<int> count) {
+	int hash = 0;
+	int a= 378551;
+	int b=63689;
+
+	for(int i=0; i<count.size(); i++) {
+		hash = hash * a+ count[i];
+		a = a * b;
+	}
+	return hash;
+}
+vector<string> anagrams(vector<string> &strs) {
+	unordered_map<int, vector<string> > myMap;
+	for(int i=0; i<strs.size(); i++) {
+		vector<int> count = vector<int>(26, 0);
+		for(char c : strs[i]) {
+			count[c-'a'] ++;
+		}
+		int hash = getHash(count);
+		if(myMap.find(hash) != myMap.end()) {
+			myMap[hash].push_back(strs[i]);
+		}
+		else {
+			vector<string> tmp {strs[i]};
+			myMap[hash] = tmp;
+		}
+	}
+	vector<string> res;
+	for(auto &m : myMap) {
+		if(m.second.size() > 1) {
+			for(auto &y:m.second) {
+				res.push_back(y);
+			}
+		}
+	}
+	return res;
+}
