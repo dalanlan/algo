@@ -2,7 +2,10 @@
 /* 
 Geeks for geeks : longest palindromic subsequence
 
-Given a sequence, find the length of the longest palindromic subsequence in it. For example, if the given sequence is “BBABCBCAB”, then the output should be 7 as “BABCBAB” is the longest palindromic subseuqnce in it. “BBBBB” and “BBCBB” are also palindromic subsequences of the given sequence, but not the longest ones.
+Given a sequence, find the length of the longest palindromic subsequence in it. For example, 
+if the given sequence is “BBABCBCAB”, then the output should be 7 
+as “BABCBAB” is the longest palindromic subseuqnce in it. “BBBBB” and “BBCBB” are also 
+palindromic subsequences of the given sequence, but not the longest ones.
 
 http://www.geeksforgeeks.org/dynamic-programming-set-12-longest-palindromic-subsequence/
 
@@ -10,32 +13,28 @@ http://www.geeksforgeeks.org/dynamic-programming-set-12-longest-palindromic-subs
 
 int longestPalindromSubsequence(string &s) {
 	int len = s.length();
-	if(len <= 1) {
-		return len;
-	}
+	int i, j, k;
 
 	// dp[i][j]~ longest subsequence from i to j
-	vector<vector<int>> dp<len, vector<int>(len, 0);
+	vector<vector<int>> dp=vector<vector<int>>(len, vector<int>(len, 0));
 
-	for(int i=0; i<len; i++) {
+	for(i = 0; i<len; i++) {
 		dp[i][i] = 1;
 	}
-	int count = 1;
-
-
-	for(int j=0; j<len; j++) {
-		for(int i=0; i<j; i++) {
-			if(s[i] != s[j]) {
-				dp[i][j] = max(dp[i+1][j], dp[i][j-1]);
+	// we must iterator from length
+	for(k = 2; k <=len; i++) {
+		for(i=0; i<len-k+1; i++) {
+			j = i+k-1;
+			if(s[i] == s[j] && k == 2) {
+				s[i][j]=2;
 			}
+			else  if(s[i] == s[j]) {
+				s[i][j] = s[i+1][j-1] + 2;
+			}	
 			else {
-				if(j==i+1) dp[i][j]=2;
-				else {
-					dp[i][j] = dp[i+1][j-1] + 2;
-				}
+				s[i][j] = max(s[i+1][j], s[i][j-1]);
 			}
-			count = max(count, dp[i][j]);
 		}
 	}
-	return count;
+	return dp[0][len-1];
 }

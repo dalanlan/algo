@@ -24,3 +24,25 @@ class Solution {
         
     }
 };
+
+
+int trailingZeroes(int n) {
+    long base = 5;
+    long count = 0;
+
+    while(n/base > 0) {
+        cout += n/base;
+        base *= 5;
+    }
+    return cout;
+}
+
+int trailingZeroes(int n) {
+    int count  = 5;
+    n /= 5;
+    while(n) {
+        count += n;
+        n/=5;
+    }
+    return count;
+}
