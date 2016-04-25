@@ -75,3 +75,56 @@ public:
 };
 
 
+// recursive way
+// kinda clean, yet TLE
+
+
+// solution 3: kinda crap
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* reverse(ListNode *head) {
+        ListNode *prev = NULL, *cur = head, *next=NULL;
+        while(cur) {
+            next = cur->next;
+            cur->next = prev;
+            prev = cur;
+            cur = next;
+        }
+        return prev;
+    }
+    
+    void reorderList(ListNode* head) {
+        if(!head || !head->next) {
+            return;
+        }
+        // find the middle of the list 
+        // reverse the second part
+        // merge it
+        ListNode *fast=head, *slow=head;
+        while(fast->next && fast->next->next) {
+            fast = fast->next->next;
+            slow = slow->next;
+        }
+        
+        //reverse slow->next
+        ListNode* right = reverse(slow->next);
+        slow->next=right;
+        
+        ListNode* left = head;
+        while(left != slow) {
+            slow->next = right->next;
+            right->next= left->next;
+            left->next= right;
+            left = right->next;
+            right = slow->next;
+        }
+    }
+};

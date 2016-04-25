@@ -1,7 +1,7 @@
 
 /*
 LintCode: sprial matrix
-http://www.lintcode.com/zh-cn/problem/spiral-matrix/#
+http://www.lintcode.com/zh-cn/problem/spiral-matrix/#iv
 */
 
 class Solution {

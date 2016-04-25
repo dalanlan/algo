@@ -60,6 +60,8 @@ public:
      * @return an integer
      */
      
+     // palindrome[i][j] indicates whether s[i~j] is palindrome
+
     void palin(string s, vector<vector<bool>> &palindrome) {
         int len = palindrome.size();
         for(int i=0; i<len; i++) {
@@ -85,6 +87,7 @@ public:
         vector<vector<bool>> palindrome(s.length(), vector<bool>(s.length(), false));
         palin(s, palindrome);
         
+        // dp again
         vector<int> f(s.length()+1, INT_MAX);
         f[0]=0;
         for(int i=1; i<=s.length(); i++) {
