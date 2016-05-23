@@ -83,3 +83,87 @@ public:
     }
 };
 // segment tree is fine though, not so very right exactly
+
+
+// solution 1p: just rewrite the code
+
+class Solution {
+public:
+
+    class BinaryTreeNode {
+        public:
+        BinaryTreeNode *left;
+        BinaryTreeNode *right;
+        int val;
+        int count;
+        BinaryTreeNode(int v) {
+            val = v;
+            count = 0;
+            left = right = NULL;
+        }
+        
+    };
+    BinaryTreeNode *root=NULL;
+    
+    void insert(int v) {
+        if(!root) {
+            root = new BinaryTreeNode(v);
+        }
+        else {
+            BinaryTreeNode *cur = root;
+            while(cur) {
+                if(v < cur->val) {
+                    cur->count++;
+                    if(cur->left) {
+                        cur = cur->left;
+                    }
+                    else {
+                        cur->left = new BinaryTreeNode(v);
+                        break;
+                    }
+                }
+                else {
+                    if(!cur->right) {
+                        cur->right = new BinaryTreeNode(v);
+                        break;
+                    }
+                    else {
+                        cur = cur->right;
+                    }
+                }
+            }
+        }
+    }
+    
+    int query(int v) {
+        int res = 0;
+        BinaryTreeNode *cur = root;
+        while(cur) {
+            if(v > cur->val) {
+                res += 1+cur->count;
+                cur = cur->right;
+            }
+            else if(v == cur->val) {
+                res += cur->count;
+                break;
+            }
+            else {
+                cur = cur->left;
+            }
+        }
+        return res;
+    }
+    
+    vector<int> countSmaller(vector<int>& nums) {
+        if(nums.size() == 0) {
+            return {};
+        }
+        vector<int> res = {0};
+        
+        for(int i=nums.size()-2; i>=0; i--) {
+            insert(nums[i+1]);
+            res.insert(res.begin(), query(nums[i]));
+        }
+        return res;
+    }
+};
