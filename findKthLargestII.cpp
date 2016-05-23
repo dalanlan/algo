@@ -51,3 +51,49 @@ int findKthLargest(vector<int>& nums, int start, int end, int k) {
 		return findKthLargest(nums, start, left-1, k);
 	}
 }
+
+
+// solutio 3: still quick sort
+// using partition function to make it more elegant
+class Solution {
+public:
+    
+    
+    int findKthLargest(vector<int>& nums, int k) {
+        int sz = nums.size();
+        return findKthLargest(nums, 0, sz-1, sz-k);    
+    }
+    
+    int partition(vector<int>& nums, int start, int end) {
+        int pivot = nums[start];
+        
+        int right = end;
+        for(int i=end; i > start; i--) {
+            if(nums[i] >= pivot) {
+                swap(nums[right--],nums[i]);
+            }
+        }
+        swap(nums[start], nums[right]);
+        return right;
+    }
+    // write a partition function to make it more elegant
+    int findKthLargest(vector<int>& nums, int start, int end, int target) {
+        if(start > end) {
+            return -1;
+        }
+
+        int pivot = partition(nums, start, end);
+        
+        if(pivot == target) {
+            return nums[target];
+        }
+        else if(pivot < target) {
+            return findKthLargest(nums, pivot+1, end, target);
+        }
+        else {
+            return findKthLargest(nums, start, pivot-1, target);
+        }
+    }
+    
+    
+};
