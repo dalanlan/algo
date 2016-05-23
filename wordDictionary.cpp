@@ -1,91 +1,84 @@
-// Add and Search Word - Data Structure design
-
 /*
-Design a data structure that supports the following
-two operations:
-
-void addWord(word)
-void search(word)
-
-search(word) can search a literal word or a regular
-expression string containing only letters "a"-"z" or ".".
-A "." means that it can represent any one letter.
-
-addWord("bad")
-addWord("dad")
-addWord("mad")
-search("pad") -> false
-search("bad") -> true
-search(".ad") -> true
-search("b..") -> true
+LintCode: add and search word 
+http://www.lintcode.com/zh-cn/problem/add-and-search-word/
 
 */
 
 
+
 class TrieNode {
 public:
-	unordered_map<char, TrieNode*> childNodes;
-	char nodeChar;
-	bool isLeaf;
-	TrieNode() {
-		isLeaf = false;
-	}
-	TrieNode(char c) {
-		nodeChar = c;
-		isLeaf = false;
-	}
+    vector<TrieNode*> child;
+    bool isLeaf;
+    char ch;
+    
+    TrieNode() {
+        child = vector<TrieNode*>(26, NULL);
+        isLeaf = false;
+    }
+    TrieNode(char c) {
+        child = vector<TrieNode*>(26, NULL);
+        isLeaf = false;
+        ch = c;
+    }
 };
-
 
 class WordDictionary {
 public:
-	
-	WordDictionary() {
-		root = new TrieNode();
-	}
-	// Adds a word into the data structure.
-	void addWord(string word) {
-		TrieNode* curRoot = root;
-		for(int i=0; i < word.length(); i++) {
-			if(curRoot->childNodes.find(word[i]) == curRoot->childNodes.end()) {
-				curRoot->childNodes[word[i]] = new TrieNode(word[i]);
-			}
-			curRoot = curRoot->childNodes[word[i]];
-		}
-		curRoot->isLeaf = true;
-	}
-	
+    TrieNode* root;
+    // construction function
+    WordDictionary() {
+        root = new TrieNode();
+    }
+    // Adds a word into the data structure.
+    void addWord(string word) {
+        TrieNode *curRoot = root;
+        int index;
+        for(int i=0; i<word.length(); i++) {
+            index = word[i]-'a';
+            if(curRoot->child[index] == NULL) {
+                curRoot->child[index] = new TrieNode(word[i]);
+            }
+            curRoot = curRoot->child[index];
+        }
+        curRoot->isLeaf = true;
+        
+    }
 
-	bool search(string word) {
-		return searchUtil(root, 0, word); // TrieNode*, index, string word
-	}
-	bool searchUtil(TrieNode* root, int index, string word) {
-		if(index == word.length()) {
-			return root->isLeaf;
-		}
-
-		if(word[index] == '.') {
-			for(auto c : root->childNodes) {
-				if(searchUtil(c.second, index+1, word) == true) {
-					return true;
-				}
-			}
-			return false;
-		}
-		// word[index] != '.'
-		else {
-			if(root->childNodes.find(word[index]) == root->childNodes.end()) {
-				return false;
-			}
-			else {
-				return searchUtil(root->childNodes[word[index]], index+1, word);
-			}
-		}
-
-	}
-
-	private:
-
-	TrieNode* root;
-
+    bool searchUtil(string word, int index, TrieNode* root) {
+        if(index == word.length()) {
+                return root->isLeaf;
+        }
+        
+        if(word[index] == '.') {
+            for(int i=0; i<root->child.size(); i++) {
+                if(root->child[i] != NULL && searchUtil(word, index+1, root->child[i])) {
+                    return true;
+                }
+            }
+            return false;
+        }
+        else {
+            int ind = word[index] -'a';
+            if(root->child[ind] == NULL) {
+                return false;
+            }
+            return searchUtil(word, index+1, root->child[ind]);
+        }
+        
+    }
+    // Returns if the word is in the data structure. A word could
+    // contain the dot character '.' to represent any one letter.
+    bool search(string word) {
+        if(word.length() == 0) {
+            return true;
+        }
+        return searchUtil(word, 0, root);
+        
+    }
 };
+
+// Your WordDictionary object will be instantiated and called as such:
+// WordDictionary wordDictionary;
+// wordDictionary.addWord("word");
+// wordDictionary.search("pattern");
