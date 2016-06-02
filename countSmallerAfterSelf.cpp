@@ -85,6 +85,33 @@ public:
 // segment tree is fine though, not so very right exactly
 
 
+/* solution new : http://www.cnblogs.com/grandyang/p/5078490.html
+
+*/
+
+    vector<int> countSmaller(vector<int>& nums) {
+        vector<int> tmp;
+        vector<int> res(nums.size(), 0);
+        
+        for(int i=nums.size()-1; i>=0; i--) {
+            int lo = 0, hi = tmp.size();
+            while(lo < hi) {
+                int mid = (lo+hi)/2;
+            
+                if(nums[i] > tmp[mid]) {
+                    lo = mid+1;
+                }
+                else {
+                    hi = mid;
+                }
+            }
+            res[i] = hi;
+            tmp.insert(tmp.begin()+hi, nums[i]);
+        }
+        return res;
+    }
+
+
 // solution 1p: just rewrite the code
 
 class Solution {
@@ -167,3 +194,17 @@ public:
         return res;
     }
 };
+
+
+// solution X: another solution
+
+    vector<int> countSmaller(vector<int>& nums) {
+        vector<int> res(nums.size(), 0);
+        vector<int> tmp;
+        for(int i=nums.size()-1; i>=0; i--) {
+            int d = distance(tmp.begin(), lower_bound(tmp.begin(), tmp.end(), nums[i]));
+            res[i] = d;
+            tmp.insert(tmp.begin()+d, nums[i]);
+        }
+        return res;
+    }

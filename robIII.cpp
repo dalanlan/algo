@@ -34,6 +34,7 @@ vector<int> robHelper(TreeNode* root) {
 	vector<int> res;
 	// res[0] : pick up root
 	res.push_back(left[1] + right[1] + root->val);
+	// res[1] : no root obviously
 	res.push_back(max(left[0],left[1]) + max(right[0],right[1]));
 	return res;
 
