@@ -26,3 +26,16 @@ public:
         return dp[nums.size()];
     }
 };
+
+// no need for extra array space
+    long long houseRobber(vector<int> A) {
+        long long exclude=0, include=0;
+        
+        for(int i=0; i<A.size(); i++) {
+            long long exc = exclude, inc = include;
+            include = exc + A[i];
+            exclude = max(exc, inc);
+        }
+        return max(include, exclude);
+    }
+    

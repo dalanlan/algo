@@ -37,31 +37,23 @@ public:
      * @param root: a TreeNode, the root of the binary tree
      * @return: nothing
      */
+        
     void dfs(TreeNode* root, queue<TreeNode*> &q) {
-    	if(root == NULL) {
-    		return;
-    	}
-    	q.push(root);
-    	if(root->left) {
-    		dfs(root->left, q);
-    	}
-    	if(root->right) {
-    		dfs(root->right, q);
-    	}
+        if(!root) {
+            return;
+        }
+        q.push(root);
+        dfs(root->left,q);
+        dfs(root->right,q);
     }
-    void flatten(TreeNode *root) {
+    void flatten(TreeNode* root) {
         queue<TreeNode*> q;
         dfs(root, q);
         while(!q.empty()) {
-        	TreeNode* tmp = q.front();
-        	q.pop();
-        	tmp->left = NULL;
-        	if(!q.empty()) 
-        	    tmp->right = q.front();
-        	else {
-        	    tmp->right = NULL;
-        	}
+            TreeNode* tmp = q.front();
+            q.pop();
+            tmp->left = NULL;
+            tmp->right = q.empty()?NULL:q.front();
         }
-        
     }
 };

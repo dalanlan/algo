@@ -1,7 +1,7 @@
 
 /*
 LeetCode: missing ranges
-The online judge system  has been blocked
+The online judge system has been blocked
 */
 
 vector<string> missingRanges(vector<int> nums) {
