@@ -46,3 +46,47 @@ int kthSmallest(TreeNode* root, int k)
 }
 
 
+// solution 3: flatten solution 
+// I think my mind is kinda messy
+
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    
+void flatten(vector<int>& res, TreeNode* root) {
+    
+    TreeNode* tmp = root;
+    stack<TreeNode*> stk;
+    while(!stk.empty() || tmp) {
+        if(tmp) {
+            stk.push(tmp);
+            tmp = tmp->left;
+        }
+        else {
+            tmp = stk.top();
+            stk.pop();
+            res.push_back(tmp->val);
+            tmp = tmp->right;
+        }
+    }
+    
+    return;
+    
+}
+// flatten into a vector 
+// and find out the kth index
+int kthSmallest(TreeNode* root, int k) {
+    vector<int> res;
+    flatten(res, root);
+    return res[k-1];
+}
+};
+

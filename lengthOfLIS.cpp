@@ -45,7 +45,7 @@ int helper(vector<int>& nums, int sz, int& max) {
 }
 
 // dynamic programming
-
+// O(N^2)
 int lengthOfLIS(vector<int> &nums) {
 	int sz = nums.size(); 
 	if(sz <= 1) {
@@ -65,6 +65,32 @@ int lengthOfLIS(vector<int> &nums) {
 	}
 	return maxVal;
 }
+
+// rewrite
+// O(N^2)
+class Solution {
+public:
+    int lengthOfLIS(vector<int>& nums) {
+        
+        int sz = nums.size();
+        if(sz <= 1) {
+            return sz;
+        }
+        int res = 1;
+        
+        vector<int> dp(sz, 1);
+        
+        for(int i=1; i<sz; i++) {
+            for(int j=0; j<i; j++) {
+                if(nums[i] > nums[j]) {
+                    dp[i] = max(dp[i], dp[j]+1);
+                    res = max(res, dp[i]);
+                }
+            }
+        }
+        return res;
+    }
+};
 
 // conduct binary search???
 // lower bound??

@@ -4,7 +4,7 @@
 
 	if(row >= rowMax || row < 0 || col >= colMax || col < 0) return false;
 	
-	if(board[row][col] == word[index] && visit[row][col] == 0){ //??? 
+	if(board[row][col] == word[index] && visit[row][col] == 0){ 
 		visit[row][col] = 1;
 		if (index == word.length()-1) {
 			return true;
@@ -30,13 +30,12 @@ bool exist(vector<vector<char>>& board, string word) {
 	int row = board.size();
 	int col = board[0].size();
 	vector<vector<int>> visit(row, vector<int>(col, 0));
-	bool res = false;
+	
 
 	for(int i=0; i< row;i++) {
 		for(int j=0;j < col;j++) {
 			if(dfs(board, visit, i, j, word, 0)){
-				res = true;
-				break;
+				return true;
 			}
 
 		}
@@ -44,6 +43,6 @@ bool exist(vector<vector<char>>& board, string word) {
 	}
 	
 
-	return res;
+	return false;
 
 }

@@ -55,3 +55,30 @@ vector<vector<int> > permute(vector<int>& nums) {
 	permute(res, nums, 0);
 	return res;
 }
+
+
+
+
+
+// rewrite
+class Solution {
+public:
+    vector<vector<int>> permute(vector<int>& nums) {
+        vector<vector<int> > res;
+        permute(res, nums, 0);    
+        return res;
+    }
+    void permute(vector<vector<int> > &res, vector<int>& nums, int ind) {
+        if(ind == nums.size()-1) {
+            res.push_back(nums);
+        }
+        else {
+            for(int i=ind; i<nums.size(); i++) {
+                swap(nums[i], nums[ind]);
+                permute(res, nums, ind+1);
+                swap(nums[i], nums[ind]);
+            }
+    
+        }
+    }
+};

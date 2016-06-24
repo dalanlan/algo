@@ -119,3 +119,44 @@ vector<int> diffWaysToCompute(string input, unordered_map<string, vector<int>>& 
 	cache[input] = res;
 	return res;
 }
+
+// solution 3: recursive solution, no cache
+
+class Solution {
+public:
+    
+    // recursive
+    vector<int> diffWaysToCompute(string input) {
+        vector<int> res;
+        
+        for(int i=0; i<input.length(); i++) {
+            if(input[i] == '+' || input[i] == '-' || input[i] == '*') {
+                string rem1 = input.substr(0, i);
+                string rem2 = input.substr(i+1);
+                vector<int> left = diffWaysToCompute(rem1);
+                vector<int> right = diffWaysToCompute(rem2);
+                
+                for(int l : left) {
+                    for(int r: right) {
+                        switch(input[i]) {
+                            case '+':
+                                res.push_back(l+r);
+                                break;
+                            case '-':
+                                res.push_back(l-r);
+                                break;
+                            case '*':
+                                res.push_back(l*r);
+                                break;
+                        }
+                    }
+                }
+            }
+        }
+        if(res.size() ==0) {
+            res.push_back(stoi(input));
+            
+        }
+        return res;
+    }
+};

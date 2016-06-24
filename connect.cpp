@@ -84,3 +84,52 @@ void connect(TreeLinkNode* root) {
 		}
 	}
 }
+
+
+// easy bfs
+// https://leetcode.com/problems/populating-next-right-pointers-in-each-node/
+/**
+ * Definition for binary tree with next pointer.
+ * struct TreeLinkNode {
+ *  int val;
+ *  TreeLinkNode *left, *right, *next;
+ *  TreeLinkNode(int x) : val(x), left(NULL), right(NULL), next(NULL) {}
+ * };
+ */
+
+ // defintely work for `populate next right pointers in each node ii`
+ // https://leetcode.com/problems/populating-next-right-pointers-in-each-node-ii/
+class Solution {
+public:
+    void connect(TreeLinkNode *root) {
+        // bfs???
+        if(!root) {
+            return;
+        }
+        queue<TreeLinkNode*> q;
+        q.push(root);
+        
+        while(!q.empty()) {
+            int sz = q.size();
+            for(int i=0; i < sz; i++) {
+                TreeLinkNode* tmp = q.front();
+                q.pop();
+                if(i == sz-1) {
+                    tmp->next = NULL;
+                }
+                else {
+                    tmp->next = q.front();
+                }
+                
+                if(tmp->left) {
+                    q.push(tmp->left);
+                }
+                if(tmp->right) {
+                    q.push(tmp->right);
+                }
+            }
+        }
+        return;
+        
+    }
+};
