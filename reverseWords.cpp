@@ -4,43 +4,58 @@ Lintcode: reverse words in a string
 http://www.lintcode.com/zh-cn/problem/reverse-words-in-a-string/
 */
 
-
 class Solution {
 public:
-    /**
-     * @param s : A string
-     * @return : A string
-     */
-    stack<string> split(string s, char del) {
-        stack<string> res;
-        string tok;
+    // solve it with extra space
+    
+    vector<string> split(string s, char del) {
+        vector<string> res;
         stringstream ss(s);
-        while(getline(ss, tok, del)) {
-            res.push(tok);
+        string token;
+        while(getline(ss, token, del)) {
+            res.push_back(token);
         }
         return res;
     }
-    string reverseWords(string s) {
-        // write your code here
-        stack<string> res = split(s, ' ');
-        
+    void reverseWords(string &s) {
+        vector<string> res = split(s, ' ');
         string ans;
-        
-        while(!res.empty()) {
-            string tmp = res.top();
-            res.pop();
-            if(tmp == " ") {
+        for(int i=res.size()-1; i>=0; i--) {
+            if(res[i] == "") {
                 continue;
             }
             else {
                 if(ans.empty()) {
-                    ans += tmp;
+                    ans += res[i];
                 }
                 else {
-                    ans += " "+tmp;
+                    ans += " "+ res[i];
                 }
             }
         }
-        return ans;
+        s = ans;
     }
 };
+
+// solution 2: in-place reverse
+  void reverseWords(string &s) {
+        reverse(s.begin(), s.end());
+        
+        int curInd = 0;
+        for(int i=0; i<s.size(); i++) {
+            
+            if(s[i] != ' ') {
+                if(curInd != 0) {
+                    s[curInd++] = ' ';
+                }
+                int j=i;
+                while(j<s.size() && s[j] != ' ') {
+                    s[curInd++] = s[j++];
+                }
+                reverse(s.begin()+curInd-(j-i), s.begin()+curInd);
+                i=j;
+            }
+        }
+        // wipe out extra space
+        s.erase(s.begin()+curInd, s.end());
+    }

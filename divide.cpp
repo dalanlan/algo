@@ -61,3 +61,32 @@ public:
         return res;
     }
 };
+
+
+class Solution {
+public:
+    int divide(int dividend, int divisor) {
+        long a = abs((long)dividend);
+        long b = abs((long)divisor);
+        
+        int sign = 1;
+        if((dividend>0) ^ (divisor>0)) {
+            sign = -1;
+        }
+        long res = 0;
+
+        
+        while(a >= b) {
+            for(long tmp = b, cnt = 1; tmp <= a; tmp <<= 1, cnt <<= 1) {
+                
+                a -= tmp;
+                res += cnt;
+            }            
+        }
+        res *= sign;
+        if(res > INT_MAX || res < INT_MIN) {
+            return INT_MAX;
+        }
+        return res;
+    }
+};

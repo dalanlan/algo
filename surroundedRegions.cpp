@@ -3,7 +3,8 @@ LintCode: surrounded regions
 http://www.lintcode.com/zh-cn/problem/surrounded-regions/
 */
 
-
+// bad solution
+// we dont need visited actually
 class Solution {
 public:
     /**

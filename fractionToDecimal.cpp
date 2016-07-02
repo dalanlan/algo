@@ -41,3 +41,70 @@ public:
        
     }
 };
+
+
+string fractionToDecimal(int numerator, int denominator) {
+    long a = abs((long)numerator);
+    long b = abs((long)denominator);
+
+    string res("");
+    if((numerator > 0) ^ (denominator > 0)) {
+        res += "-";
+    }
+
+    res += to_string(a/b);
+    long remain = a%b;
+    if(remain == 0) {
+        return res;
+    }
+    res += ".";
+    unordered_map<long,int> map;
+    
+    for(;remain != 0; remain %= b) {
+        if(map.count(remain)) {
+            res.insert(res.begin() + map[remain], 1, '(');
+            res += ")";
+            break;
+        }
+        map[remain] = res.size();
+        remain *= 10;
+        res += to_string(remain/b;)
+        
+    }
+    return res;
+}
+
+
+string fractionToDecimal(int numerator, int denominator) {
+    if(numerator == 0) {
+        return "0";
+    }
+    long a = abs((long)numerator);
+    long b = abs((long)denominator);
+
+    string res("");
+    if((numerator > 0) ^ (denominator > 0)) {
+        res += "-";
+    }
+
+    res += to_string(a/b);
+    long remain = a%b;
+    if(remain == 0) {
+        return res;
+    }
+    res += ".";
+    unordered_map<long,int> map;
+    
+    for(;remain != 0; remain %= b) {
+        if(map.count(remain)) {
+            res.insert(res.begin() + map[remain], 1, '(');
+            res += ")";
+            break;
+        }
+        map[remain] = res.size();
+        remain *= 10;
+        res += to_string(remain/b);
+        
+    }
+    return res;
+}
