@@ -22,9 +22,8 @@ int removeDuplicates(vector<int>& nums) {
     }
 
 
-    //What does this suppose to mean?
 
-    int removeDuplicates(vector<int>& nums) {
+int removeDuplicates(vector<int>& nums) {
     int i = 0;
     for (int n : nums)
         if (!i || n > nums[i-1])
@@ -39,3 +38,19 @@ int removeDuplicates(vector<int>& nums) {
             nums[i++] = n;
     return i;
 }
+
+int removeDuplicates(vector<int> &nums) {
+    
+        int sz = nums.size();
+        if(sz == 0) {
+            return 0;
+        }
+        int i = 0;
+        for(int j=1; j<sz;j++) {
+            if(nums[j] > nums[i]) {
+                nums[++i] = nums[j];
+            }
+        }
+        return i+1;
+        
+    }

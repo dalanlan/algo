@@ -45,4 +45,3 @@ int largestRectangleArea(vector<int>& heights) {
         }
     }
     return res;
-}

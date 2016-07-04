@@ -1,29 +1,36 @@
 
+    /*
+    LeetCode: 
+    https://leetcode.com/problems/top-k-frequent-elements/
 
-/*
-LeetCode: top k frequent 
-https://leetcode.com/problems/top-k-frequent-elements/
-*/
+    Given a non-empty array of integers, return the k most frequent elements.
 
-class Solution {
-public:
+    http://www.geeksforgeeks.org/find-the-k-most-frequent-words-from-a-file/
+    */
+
     vector<int> topKFrequent(vector<int>& nums, int k) {
-        // sort the nums pair
         unordered_map<int,int> counter;
-        for(int n:nums) {
-            counter[n]++;
+        
+        for(int i:nums) {
+            counter[i]++;
         }
-        // pop out less frequent pairs
-        // max-heap
-        priority_queue<pair<int,int>> pq;
-        for(auto c: counter) {
-            pq.push(make_pair(c.second, c.first));
+        
+        priority_queue<pair<int,int>, vector<pair<int,int>>, greater<pair<int,int>>> que;
+        
+        for(auto x:counter) {
+            que.push(make_pair(x.second, x.first));
+            while(que.size() > k) {
+                que.pop();
+            }
         }
+        
+        
         vector<int> res;
-        while(res.size() < k) {
-            res.push_back(pq.top().second);
-            pq.pop();
+        while(!que.empty()) {
+            res.push_back(que.top().second);
+            que.pop();
         }
         return res;
+    
     }
-};
+
