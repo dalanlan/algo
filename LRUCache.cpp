@@ -121,4 +121,108 @@ class LRUCache {
 			lis.splice()
 		}
 	}
-}
+};
+
+
+// solution: AC
+// The key idea is to use
+// double-linked list
+
+class LRUCache{
+public:
+    class DoubledListNode {
+    public:
+        int value;
+        int key;
+        DoubledListNode* prev;
+        DoubledListNode* next;
+        DoubledListNode(int k, int v) {
+            key = k;
+            value = v;
+            prev = next = NULL;
+        }
+    };
+    
+    int capa;
+    DoubledListNode *head;
+    DoubledListNode *tail;
+    int size;
+    
+    unordered_map<int, DoubledListNode*> map;
+    
+    LRUCache(int capacity) {
+        // head and tail 
+        // are both dummy pointers
+        
+        head = new DoubledListNode(0, 0);
+        tail = new DoubledListNode(0, 0);
+        
+        head->next = tail;
+        tail->prev = head;
+        
+        capa = capacity;
+        size = 0;
+    }
+    
+    int get(int key) {
+        int res = -1;
+        if(map.count(key) > 0) {
+            DoubledListNode* find = map[key];
+            res = find->value;
+            find->prev->next = find->next;
+            find->next->prev = find->prev;
+            
+            find->prev = tail->prev;
+            tail->prev->next = find;
+            find->next = tail;
+            tail->prev = find;
+            
+            
+        }
+        return res;
+    }
+    
+    // delete from the head
+    // 'cause we extends from the tail
+    void set(int key, int value) {
+        if(map.count(key)) {
+            DoubledListNode* find = map[key];
+            find->value = value;
+            
+            // move the list order
+            find->prev->next = find->next;
+            find->next->prev = find->prev;
+            
+            find->prev = tail->prev;
+            tail->prev->next = find;
+            find->next = tail;
+            tail->prev = find;
+        }
+        else {
+            // set up a new node
+            DoubledListNode *tmp = new DoubledListNode(key, value);
+            map[key] = tmp;
+            // capacity is available
+            if(size < capa) {
+                
+                size++;
+            }
+            else {
+                // delete an old node
+                DoubledListNode* temp = head->next;
+                map.erase(temp->key);
+                head->next = temp->next;
+                head->next->prev = head;
+                
+               
+                // size remains
+            }
+             // set up a new one
+                
+            tail->prev->next = tmp;
+            tmp->prev = tail->prev;
+            tail->prev = tmp;
+            tmp->next = tail;
+        }
+    }
+};
