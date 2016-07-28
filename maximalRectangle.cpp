@@ -9,6 +9,48 @@ Given a 2D binary matrix filled with 0's and 1's, find the largest rectangle con
 class Solution {
 public:
     int maximalRectangle(vector<vector<char>>& matrix) {
+        int row=matrix.size();
+        int col=row==0?0:matrix[0].size();
+        
+        vector<int> dp(col, 0);
+        int res = 0;
+        for(int i=0; i<row; i++) {
+            for(int j=0; j<col; j++) {
+                if(matrix[i][j] == '0') {
+                    dp[j]=0;
+                    
+                }
+                else {
+                    dp[j]+=1;
+                }
+            }
+            res = max(res, maxHistogram(dp));
+        }
+        return res;
+    }
+    int maxHistogram(vector<int> nums) {
+        stack<int> stk;
+        nums.push_back(0);
+        int res = 0;
+        for(int i=0; i<nums.size(); i++) {
+            // >= or > ???
+            if(stk.empty() || nums[i] >= nums[stk.top()]) {
+                stk.push(i);
+            }
+            else {
+                int bk = stk.top();
+                stk.pop();
+                res = max(res, (stk.empty()?i:i-stk.top()-1)*nums[bk]);
+                i--;
+            }
+        }
+        return res;
+    }
+};
+
+class Solution {
+public:
+    int maximalRectangle(vector<vector<char>>& matrix) {
         
         
         if(matrix.size() == 0 || matrix[0].size() == 0) {
