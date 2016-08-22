@@ -16,7 +16,7 @@ vector<string> summaryRanges(vector<int>& nums) {
     int beginInd = 0, endInd = 0;
     
     while(endInd < sz) {
-        if(endInd+1<sz && nums[endInd+1] == nums[endInd]+1) {
+        while(endInd+1<sz && nums[endInd+1] == nums[endInd]+1) {
             endInd++;
         }
         else {

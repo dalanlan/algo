@@ -37,3 +37,4 @@ int maxDiff(vector<int> nums) {
 	return res;
 }
 
+// solution 3: diff array

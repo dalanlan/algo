@@ -80,3 +80,25 @@ int main()
 	//	cout<<*it<<endl;
 
 }
+
+
+vector<string> summaryRanges(vector<int>& nums) {
+	vector<string> res;
+
+	int sz = nums.size();
+	int beginIdx = 0, endIdx = 0;
+	while(endIdx < sz) {
+		while(endIdx+1<sz && nums[endIdx+1] == nums[endIdx]+1) {
+			endIdx++;
+		}
+		if(beginIdx == endIdx) {
+			res.push_back(to_string(nums[beginIdx]));
+		}
+		else {
+			res.push_back(to_string(nums[beginIdx]) + "->" + to_string(nums[endIdx]));
+		}
+		beginIdx = endIdx+1;
+		endIdx = beginIdx;
+	}
+	return res;
+}

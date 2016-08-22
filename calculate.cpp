@@ -2,6 +2,7 @@
 // implement a basic calculator to evaluate a simple expression string
 
 // Solution 1: stack 
+// https://discuss.leetcode.com/topic/15816/iterative-java-solution-with-stack
 int calculate(string s) {
 	stack<int> nums, op;
 

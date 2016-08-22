@@ -41,3 +41,29 @@ public:
         }
     }
     };
+
+
+// solution 2: 
+   vector<vector<int>> permuteUnique(vector<int>& nums) {
+        vector<vector<int>> res;
+        // sort is to guarantee the comparison between 
+        // the former one and the latter one
+        sort(nums.begin(), nums.end());
+        permute(res, nums, 0);
+        return res;
+    }
+    void permute(vector<vector<int>> &res, vector<int> nums, int ind) {
+        if(ind == nums.size()-1) {
+            res.push_back(nums);
+        }
+        else {
+            for(int i=ind; i<nums.size(); i++) {
+                if(i!=ind && nums[i]==nums[ind]) {
+                    continue;
+                }
+                swap(nums[i], nums[ind]);
+                permute(res, nums, ind+1);
+                
+            }
+        }
+    }

@@ -33,3 +33,26 @@ public:
         
     }
 };
+
+vector<int> previousPermuation(vector<int> &nums) {
+        int k=nums.size()-2;
+        for(; k>=0; k--) {
+            if(nums[k] > nums[k+1]) {
+                break;
+            }
+        }
+        if(k == -1) {
+            reverse(nums.begin(), nums.end());
+            return;
+        }
+
+        int j = k+1;
+        for(; j < nums.size()-1; j++) {
+            if(nums[j] < nums[k] && nums[k] <= nums[j+1]) {
+                break;
+            }
+        }
+        swap(nums[j], nums[k]);
+        reverse(nums.begin()+k+1, nums.end());
+        return nums;
+}

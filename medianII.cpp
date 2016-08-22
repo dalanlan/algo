@@ -10,6 +10,33 @@ priority_queue<int> q; (default)
 priority_queue<int, vector<int>, greater<int>> q2; (min-heap)
 */
 
+    // a very clean AC solution
+     vetor<int> medianII(vector<int> &nums) {
+         if(nums.size() <= 1) {
+             return nums;
+         }
+         vector<int> res;
+        
+         priority_queue<long> less, greater;
+         
+         for(int i=0; i<nums.size(); i++) {
+            less.push(nums[i]);
+            greater.push(-less.top());
+            less.pop();
+            
+            if(less.size() < greater.size()) {
+                less.push(-greater.top());
+                greater.pop();
+            }
+            
+            res.push_back(less.top());
+            
+            
+         }
+         return res;
+     }
+
+
 class Solution {
 public:
     /**

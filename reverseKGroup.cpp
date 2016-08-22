@@ -19,6 +19,7 @@ https://leetcode.com/problems/reverse-nodes-in-k-group/
 
 
  // solution 1: recursive
+ // AC
 class Solution {
 public:
      ListNode* reverseNode(ListNode *head) {
@@ -34,7 +35,7 @@ public:
 	return pre;
 }
 
-ListNode* reverseKGroupreverseKGroup(ListNode* head, int k) {
+ListNode* reverseKGroup(ListNode* head, int k) {
 	if(head == NULL || k<=1) {
 		return head;
 	}

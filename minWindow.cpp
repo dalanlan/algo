@@ -73,3 +73,36 @@ string minWindow(string &source, string &target) {
 	
 	return minLen == INT_MAX?"":s.substr(minStart, minLen);
 }
+
+
+class Solution {
+public:
+    string minWindow(string s, string t) {
+        vector<int> hashMap(256,0);
+        for(char c:t) {
+            hashMap[c]++;
+        }
+        
+        int validLen = 0;
+        int start = 0, len =0;
+        int minStart = INT_MAX, minLen = INT_MAX;
+        
+        for(int i=0; i<s.size(); i++) {
+            if(hashMap[s[i]] > 0) {
+                validLen++;
+            }
+            hashMap[s[i]]--;
+            len++;
+            
+            while(hashMap[s[start]] < 0) {
+                hashMap[s[start++]]++;
+                len--;
+            }
+            if(validLen == t.size() && len < minLen) {
+                minStart = start;
+                minLen = len;
+            }
+        }
+        return minLen == INT_MAX?"":s.substr(minStart, minLen);
+    }
+};
