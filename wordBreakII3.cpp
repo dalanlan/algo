@@ -35,8 +35,35 @@ vector<string> wordBreak(string s, unordered_set<string>& dict) {
 	map[s] = res;
 	return res;
 } 
+unordered_map<string, vector<string>> map;
+vector<string> combine(string word, vector<string> res) {
+	vector<string> result;
+	for(string s:res) {
+		result.push_back(word + " " + s);
+	}
+	return result;
+}
+vector<string> wrodBreak(string s, unordered_set<string> dict) {
+	
 
+	if(map.count(s)) {
+		return map[s];		
+	}
+	vector<string> res;
+	if(dict.count(s)) {
+		res.push_back(s);
+	}
 
+	for(int i=1; i<s.size(); i++) {
+		string start = s.substr(0, i);
+		if(dict.count(start)) {
+			vector<string> rem = combine(start, wordBreak(s.substr(i));
+			res.insert(res.back(), rem.begin(), rem.end());
+		}
+	}
+	map[s] = res;
+	return res;
+}
 
 // solution 2:
 // back tracking

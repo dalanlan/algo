@@ -11,6 +11,7 @@ T is “ece” which its length is 3.
 
 */
 
+// solution 1: use hash map to project the number of the characters showing up
 int lengthOfLongestSubstringWithTwoDistinct(string s) {
 	
 	int maxLen=INT_MIN;
@@ -42,4 +43,25 @@ int lengthOfLongestSubstringWithTwoDistinct(string s) {
 	}
 	return maxLen;
 
+}
+
+
+// solution 2: use hash map to project the number of 
+// characters' indexes
+int lengthOfLongestSubstringTwoDistinct(string s) {
+	unordered_map<char, int> mp;
+	int left = 0;
+	int res = 0;
+
+	for(int i=0; i<s.size(); i++) {
+		mp[s[i]] = i;
+		while(mp.size() > 2) {
+			if(mp[s[left]] == left) {
+				mp.erase(s[left]);
+			}
+			left++;
+		} 
+		res= max (res, i-left+1);
+	}
+	return res;
 }
