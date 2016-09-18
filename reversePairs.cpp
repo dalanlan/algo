@@ -81,3 +81,42 @@ public:
         }
         return cnt;
     }
+
+
+    // solution 1s:
+    long long merge(vector<int>&A, vector<int>& tmp, int lo, int hi) {
+        if(lo >= hi) {
+            return 0;
+        }
+        int mid = ((lo+hi)>>1);
+        long long left = merge(A, tmp, lo, mid);
+        long long right = merge(A, tmp, mid+1, hi);
+        
+        long long mr = 0;
+        int i=lo, j=mid+1;
+        int k=lo;
+        while(i<=mid && j<=hi) {
+            if(A[i] <= A[j]) {
+                tmp[k++] = A[i++];
+            }
+            else {
+                mr += mid-i+1;
+                tmp[k++] = A[j++];
+            }
+        }
+        while(i<=mid) {
+            tmp[k++] = A[i++];
+        }
+        while(j<=hi) {
+            tmp[k++] = A[j++];
+        }
+        for(int p=lo; p<=hi; p++) {
+            A[p] = tmp[p];
+        }
+        return left + right + mr;
+        
+    }
+    long long reversePairs(vector<int>& A) { 
+        vector<int> tmp(A.size(), 0);
+        return merge(A, tmp, 0, A.size()-1);
+    }
