@@ -17,6 +17,6 @@ int trailingZeroes(int n)
 }
 int main()
 {
-	cout<<trailingZeroes(25)<<endl;
+	cout<<trailingZeroes(32)<<endl;
 	return 0;
 }

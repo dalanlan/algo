@@ -41,7 +41,8 @@ public:
         ListNode *left = mergeKLists(lists, lo, mid);
         ListNode *right = mergeKLists(lists, mid+1, hi);
         return merge(left, right);
-    } 
+    }
+
     ListNode *merge(ListNode *l1, ListNode *l2) {
         ListNode *dummy = new ListNode(0); 
         ListNode *tail = dummy;
@@ -162,5 +163,53 @@ public:
         }
         
         return mergeKLists(res);
+    }
+};
+
+
+// solution 3: rewrite
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    
+    
+    class compare {
+        public:
+            bool operator() (ListNode *l1, ListNode *l2) {
+                return l1->val > l2->val;
+            }
+    };
+    ListNode* mergeKLists(vector<ListNode*>& lists) {
+        
+        priority_queue<ListNode*, vector<ListNode*>, compare> pq;
+        for(int i=0; i<lists.size(); i++) {
+            if(lists[i]) {
+                pq.push(lists[i]);
+            }
+        }
+        
+        ListNode* dummy = new ListNode(0);
+        ListNode* tail = dummy;
+        
+        while(!pq.empty()) {
+        
+            tail->next = pq.top();
+       
+            pq.pop();
+            tail = tail->next;
+            if(tail->next) { 
+                pq.push(tail->next);
+            }
+             
+        }
+        return dummy->next;
     }
 };
