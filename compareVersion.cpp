@@ -107,4 +107,3 @@ int main()
 
 	cout<<compareVersion(str,str2);
 	return 0;
-}

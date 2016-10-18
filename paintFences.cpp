@@ -8,6 +8,12 @@ have the same color. Return the total number of ways you can paint the fence.
 
 */
 
+// n: fences
+// k: colors
+int numWays(int n, int k) {
+
+}
+
 
 // dp[i]: different ways of paiting 
 

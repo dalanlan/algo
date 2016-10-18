@@ -161,3 +161,18 @@ int main() {
 
 
 // solution 2:
+
+int sum(vector<int>&num, int i, int j) {
+	int sum = 0;
+	
+}
+int main() {
+
+	int n;
+	cin >> n;
+	vector<int> num(n, 0);
+
+	for(int i=0; i<n; i++) {
+		cin >> num[i];
+	}
+}
